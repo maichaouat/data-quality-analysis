@@ -1,25 +1,28 @@
-# Executive Summary — BetterCharge Integration Review
+# Executive Summary 
 
 ## Key Finding
 - The integration is broadly healthy but **uneven**.
-- The risk model performs best around **threshold 0.60–0.65**. At **0.65** we get far fewer false alarms with only a tiny drop in catches.
+- The risk model performs best around **threshold 0.60–0.65** (above this percentage - predict failure). At **0.65** we get far fewer false alarms with only a tiny drop in catches.
 - **Payment-method performance** varies: **CARD** underperforms (**70.6%** success over 51 attempts) vs **Google Pay** (**87.5%**) and bank/wire (~**81%**).
 - **Category extremes:** **Gambling** has **0% approvals** (≈ **$18.7k** attempted) and **Food Delivery** **13.3%** (≈ **$0.9k**).  
 - **Data quality:** We found transactions with **user_id not in the users table** (orphaned). This likely stems from ingestion/normalization issues and can skew reporting.
 
 ## Business Impact & This Week’s Actions
 1. **Set the risk threshold to 0.65.** It still catches **35/37** bad transactions while cutting false alarms **6 → 3** and lifting accuracy to **97.3%**.  
-   _Translation:_ fewer good customers blocked and less manual review.
-2. **Nudge checkout to wallets by default** (Google/Apple Pay). Even a **+10pp** approval gain on CARD adds ~**5 extra approvals** per 51 attempts at current AOVs.
+    fewer good customers blocked and less manual review. In case there is a need to prioritzie Recall (maximize catch rate) - it is recommended to choose 0.60 threshold.
+2. **Prefer checkout to wallets by default** (Google/Apple Pay). As thier approval rate is significantly higher than other payment methods.
 3. **Policy/routing:** Block or hold **Gambling**; **investigate Food Delivery** decline codes and acquirer routing.
 4. **Data quality:** Fix the **orphaned user_id** join (log review + key normalization) to stabilize reporting.
 
 ## Next Steps
-- **A/B test** thresholds (**0.60 vs 0.65**) to confirm revenue lift and Ops savings.
-- Deep-dive **decline_code × issuer/acquirer** for CARD to target fixes.
-- Expand **payment-method routing experiments** (wallet prompts, smart retries) and track cohort-level impact post-change.
+- **A/B test** acceptance thresholds (**0.60 vs 0.65**) to confirm revenue lift and Ops savings. **Revisit** the threshold occasionally to maintain quality. Consider implementing differnet acceptance thresholds for each merchant category
+- **Investigate** the reason for transaction fail rate in gambling and gaming.
+- Develop fallback solutions for **orphaned transactions**.
 
 ## Supporting Metric — Model Performance vs Threshold
+
+![img.png](img.png)
+
 | Threshold | True Positives | False Positives | False Negatives | True Negatives | Precision % | Recall % | Accuracy % | FPR % |
 |---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | 0.60 | 36 | 6 | 1 | 129 | 87.84 | 97.30 | 96.00 | 4.42 |
