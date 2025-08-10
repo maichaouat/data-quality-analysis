@@ -3,7 +3,11 @@
 A minimal pipeline to clean the data, convert amounts to USD, and produce board-ready metrics.
 
 ## How to Run
-1) **Process data** - read the file name _"Test_TRX_USR.xlsx"_
+1) **Install Requirements** - If needed
+```bash
+pip install -r requirements.txt
+ ```
+2) **Process data** - read the file name _"Test_TRX_USR.xlsx"_
 ```bash
 python data_processing.py
 ```
@@ -26,7 +30,7 @@ business_queries.sql        # Part C SQL queries
 executive_summary.pdf       # Part D findings 
 operational_plan.md         # Part E recommendations 
 README.md                   # Instructions and overview 
-
+requirements.txt            # Requirments for imports before running
 ```
 
 ---
@@ -37,15 +41,15 @@ README.md                   # Instructions and overview
 
 ## Decision-Making & Documentation
 - **Prioritization rationale.**  focused first on: 
-1. Reliable USD conversion and fields normalization
-2. Sum of amount by merchant category 
+1. Reliable USD conversion for easy calculations and fields normalization for structured data
+2. Sum of amount by merchant category for revenue purposes 
 3. Failure rates by payment method
 4. Risk threshold analysis (0.60–0.65). 
 These directly affect revenue, approval rate, and the board discussion.
 - **Assumptions are explicit.** I assume `status ∈ {success, failed}`, `amount_usd` is the revenue basis for successful transactions, currencies are convertible via the latest FX, and payment methods are normalized (card/credit/debit → `CARD`).
 
 ## Business Focus
-- **Practical & actionable.** Outputs are simple tables and a PDF summary, with a clear recommendation to set the risk threshold to **0.65** and prefer wallets where applicable.
+- **Practical & actionable.** Outputs are simple tables and a MD files summary, with a clear recommendation to set the risk threshold to **0.65** and prefer wallets where applicable.
 - **Stakeholder impact.**
   - **Finance:** clean sum of amount in USD; view of categories dragging conversion.
   - **Product/Risk:** threshold choice (0.65), failure patterns, and top decline areas to fix.
