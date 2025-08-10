@@ -25,6 +25,8 @@
 | 0.60 | 36 | 6 | 1 | 129 | 87.84 | 97.30 | 96.00 | 4.42 |
 | 0.65 | 35 | 3 | 2 | 132 | 94.59 | 94.59 | 97.30 | 1.77 |
 
+> **Recommendation:** choose **0.65** now for a better precision/ops balance; revisit after the A/B.
+
 ## Supporting Metric — Payment Method Performance
 | Payment Method | Total Attempts | Successes | Failures | Success Rate % | Failure Rate % |
 |---|---:|---:|---:|---:|---:|
@@ -36,4 +38,3 @@
 |---|---:|---:|---:|---:|
 | gambling | $18,704.42 | 13 | 0 | 0.00 |
 | food_delivery | $921.50 | 15 | 2 | 13.33 |
-> **Recommendation:** choose **0.65** now for a better precision/ops balance; revisit after the A/B.
