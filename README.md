@@ -45,7 +45,7 @@ These directly affect revenue, approval rate, and the board discussion.
 - **Assumptions are explicit.** I assume `status ∈ {success, failed}`, `amount_usd` is the revenue basis for successful transactions, currencies are convertible via the latest FX, and payment methods are normalized (card/credit/debit → `CARD`).
 
 ## Business Focus
-- **Practical & actionable.** Outputs are simple tables and a PDF summary, with a clear recommendation to set the risk threshold to **0.65** and prefer wallets where applicable.
+- **Practical & actionable.** Outputs are simple tables and a md files summary, with a clear recommendation to set the risk threshold to **0.65** and prefer wallets where applicable.
 - **Stakeholder impact.**
   - **Finance:** clean sum of amount in USD; view of categories dragging conversion.
   - **Product/Risk:** threshold choice (0.65), failure patterns, and top decline areas to fix.
