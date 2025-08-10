@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from zoneinfo import ZoneInfo
 from normalization import DataNormalizer
 from typing import List, Any
 
@@ -55,13 +54,13 @@ def missing_user_trans_ids(
 df_tx = pd.read_excel("data/Test_TRX_USR.xlsx", sheet_name="Transactions")
 df_tx_aligned = align_table(df_tx)
 
-# --- Normalize timestamp / currency / payment_method (same logic, wrapped in a class)
+# --- Normalize timestamp / currency / payment_method
 normalizer = DataNormalizer(default_tz="UTC", dayfirst=True)
 df_tx_aligned_fixed = normalizer.fix_timestamp_currency_payment(
     df_tx_aligned, ts_col="timestamp", curr_col="currency", pay_col="payment_method"
 )
 
-# --- Convert amounts to USD (unchanged)
+# --- Convert amounts to USD
 conv = USDAmountConverter()
 df_tx_usd = conv.add_amount_usd(
     df_tx_aligned_fixed,
@@ -72,7 +71,7 @@ df_tx_usd = conv.add_amount_usd(
     refresh_rates=True,
 )
 
-# --- Save aligned transactions (unchanged)
+# --- Save aligned transactions
 pd.DataFrame(df_tx_aligned_fixed).to_excel("data/transactions_aligned_simple.xlsx", index=False)
 
 # --- Users sheet (unchanged)
@@ -80,7 +79,7 @@ df_usr = pd.read_excel("data/Test_TRX_USR.xlsx", sheet_name="Users")
 df_usr_aligned = align_table(df_usr)
 df_usr_aligned.to_excel("data/users_aligned_simple.xlsx", index=False)
 
-# --- Orphaned users (unchanged)
+# --- Orphaned users
 bad_ids = missing_user_trans_ids(
     df_tx_aligned_fixed,
     id_col="transaction_id",
