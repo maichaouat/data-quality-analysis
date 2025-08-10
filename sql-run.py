@@ -1,4 +1,4 @@
-# convert_and_run.py
+
 # Requirements: pip install pandas openpyxl duckdb
 # Purpose: 1) convert XLSX -> CSV, 2) run SQL file, 3) export one Excel with three sheets.
 
