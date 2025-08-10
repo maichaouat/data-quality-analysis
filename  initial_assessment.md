@@ -2,7 +2,7 @@
 
 ## Key Findings
 - Multiple records in both `transactions` and `users` tables are misaligned, causing corrupted values in critical fields.
-- Inconsistent formatting in `currency` and `timestamp` fields is impacting aggregation, revenue calculations, and time-based analysis.
+- Inconsistent formatting in `currency`, `payment_method` and `timestamp` fields is impacting aggregation, revenue calculations, and time-based analysis.
 - A subset of approved transactions have `user_id` values not present in the `users` table, creating reconciliation gaps and potential compliance risks.
 
 ## Planned Approach

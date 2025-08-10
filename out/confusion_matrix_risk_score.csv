@@ -1,0 +1,8 @@
+threshold,true_positives,false_positives,false_negatives,true_negatives,precision_percentage,recall_percentage,accuracy_percentage
+0.50,36,38,1,75,48.65,97.3,74.0
+0.55,36,16,1,97,69.23,97.3,88.67
+0.60,36,5,1,108,87.8,97.3,96.0
+0.65,35,2,2,111,94.59,94.59,97.33
+0.70,22,1,15,112,95.65,59.46,89.33
+0.75,17,0,20,113,100.0,45.95,86.67
+0.80,16,0,21,113,100.0,43.24,86.0
